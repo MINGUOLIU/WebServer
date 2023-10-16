@@ -32,7 +32,7 @@ void Epoll::epoll_add(SP_Channel request, int timeout) {
   int fd = request->getFd();
   if (timeout > 0) {
     add_timer(request, timeout);
-    fd2http_[fd] = request->getHolder();
+    fd2http_[fd] = request->getHolder();     
   }
   struct epoll_event event;
   event.data.fd = fd;

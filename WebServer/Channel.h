@@ -25,11 +25,11 @@ class Channel {
   std::weak_ptr<HttpData> holder_;
 
  private:
-  int parse_URI();
-  int parse_Headers();
+  int parse_URI();        //用于执行与请求解析和处理相关的操作
+  int parse_Headers();    
   int analysisRequest();
 
-  CallBack readHandler_;
+  CallBack readHandler_;    //4个回调函数允许用户为不同类型的事件注册回调函数。
   CallBack writeHandler_;
   CallBack errorHandler_;
   CallBack connHandler_;
@@ -41,7 +41,7 @@ class Channel {
   int getFd();
   void setFd(int fd);
 
-  void setHolder(std::shared_ptr<HttpData> holder) { holder_ = holder; }
+  void setHolder(std::shared_ptr<HttpData> holder) { holder_ = holder; }   //用于处理发生的事件
   std::shared_ptr<HttpData> getHolder() {
     std::shared_ptr<HttpData> ret(holder_.lock());
     return ret;
@@ -85,7 +85,7 @@ class Channel {
   void setEvents(__uint32_t ev) { events_ = ev; }
   __uint32_t &getEvents() { return events_; }
 
-  bool EqualAndUpdateLastEvents() {
+  bool EqualAndUpdateLastEvents() {    //用于比较当前的事件类型与上一次记录的事件类型是否相等，并更新上一次事件记录。
     bool ret = (lastEvents_ == events_);
     lastEvents_ = events_;
     return ret;
